@@ -201,7 +201,7 @@ The Book class stores all information related to a single book in the library. I
 - ISBN
 - Publication Year
 - Total Copies
-- Available Copies
+- Available Copies(Automatically initialized to Total Copies when a new book is added.)
 
 ### Member Functions
 
