@@ -39,7 +39,7 @@ The librarian can:
 - Search Members
 - Issue Books
 - Return Books
-- Calculate Fines
+- Manage Fine Payments
 - Generate Reports
 
 ---
@@ -51,7 +51,7 @@ The student will be able to:
 - Search Books
 - View Book Availability
 - View Borrowed Books
-- View Outstanding Fine
+- View Total Fine
 
 ---
 
@@ -60,7 +60,7 @@ The student will be able to:
 ## Book Management
 
 - Add Book
-- Delete Book
+- Remove Book
 - Update Book
 - Search Book
 - View All Books
@@ -68,9 +68,10 @@ The student will be able to:
 ## Member Management
 
 - Register Member
-- Delete Member
+- Remove Member
 - Search Member
 - View Members
+- Update Member
 
 ## Transaction Management
 
@@ -81,8 +82,9 @@ The student will be able to:
 ## Fine Management
 
 - Automatic Fine Calculation
-- Outstanding Fine Per Member
+- Total Fine Per Member
 - Fine History Per Transaction
+- Fine Payment
 
 ## Reports
 
@@ -90,7 +92,7 @@ The student will be able to:
 - Total Members
 - Available Books
 - Issued Books
-- Outstanding Fines
+- Total Fines
 
 ## File Storage
 
@@ -166,7 +168,6 @@ Phase 7
 - Book Reservation
 - QR Code Support
 - Email Notifications
-- Fine Payment System
 - Dashboard
 - Charts & Statistics
 - Web Version
@@ -178,8 +179,282 @@ Phase 7
 
 - Library owns all Books, Members, and Transactions.
 - Book stores only book-related information.
-- Member stores current outstanding fine.
+- Member stores current total unpaid fine.
 - Transaction stores fine generated for each borrowing event.
 - Business logic will be handled by the Library class.
 
 ---
+
+# 10. Book Class Design
+
+## Responsibility
+
+The Book class stores all information related to a single book in the library. It does not handle issuing, returning, searching, or fine calculation. Those responsibilities belong to the Library and Transaction classes.
+
+### Attributes
+
+- Book ID
+- Title
+- Author
+- Category
+- Publisher
+- ISBN
+- Publication Year
+- Total Copies
+- Available Copies
+
+### Member Functions
+
+- Constructor
+- displayBook()
+- updateBook()
+- isAvailable()
+
+### Design Decisions
+
+- Total Copies remains constant unless the librarian adds or removes copies.
+- Available Copies changes whenever a book is issued or returned.
+- The Book class does not know which member borrowed it.
+- Borrowing information is stored in the Transaction class.
+
+---
+
+# 11. Member Class Design
+
+## Responsibility
+
+The Member class stores all information related to a library member. It maintains the member's personal details, borrowing status, and total unpaid fine. It does not issue books, return books, or calculate fines. Those responsibilities belong to the Library class.
+
+### Attributes
+
+- Member ID
+- Roll Number
+- Name
+- Department
+- Phone Number
+- Email
+- Borrowed Book Count
+- Total Fine
+
+### Member Functions
+
+- Constructor
+- displayMember()
+- updateMember()
+- hasFine()
+
+### Design Decisions
+
+- Every member has a unique Member ID.
+- Every student also has a unique College Roll Number.
+- Total Fine stores the total unpaid fine of the member.
+- Individual fine records are stored in the Transaction class.
+- Borrowed Book Count stores the number of books currently borrowed.
+- Complete borrowing history is maintained by the Transaction class.
+
+---
+
+# 12. Library Policies
+
+The Library class defines the rules that apply to every member and transaction.
+
+## Initial Policies
+
+- Maximum Books Per Member = 5
+- Loan Duration = 15 Days
+- Fine Per Day = ₹10
+- Maximum Borrowing Fine Limit = ₹100
+
+These values are configurable and can be modified in future versions without changing the rest of the software.
+
+## Borrowing Rules
+
+- A member cannot borrow more than 5 books at the same time.
+- A book can only be issued if at least one copy is available.
+- A member with pending fine can still be searched, but future borrowing restrictions may be added in later versions.
+- Members with Total Fine greater than ₹100 cannot borrow new books until the fine is reduced below the limit.
+
+---
+
+# 13. Fine Payment Workflow
+
+The librarian can collect fine payments from members.
+
+## Workflow
+
+- Enter Member ID
+- Verify Member Exists
+- Display Current Total Fine
+- Enter Amount Paid
+- Update Member's Total Fine
+- Save Updated Data
+- Display Payment Successful
+
+## Rules
+
+- Payment amount cannot exceed the member's Total Fine.
+- If Total Fine becomes ₹0, the member can borrow books again.
+- Every payment updates the member record immediately.
+
+---
+
+# 14. Main Menu Design
+
+The application starts by displaying the main menu. From here, the librarian can access all major features of the system.
+
+## Main Menu
+
+========================================
+
+      LIBRARY MANAGEMENT SYSTEM
+
+========================================
+
+1. Book Management
+
+2. Member Management
+
+3. Transaction Management
+
+4. Reports
+
+5. Exit
+
+========================================
+
+## Book Management
+
+- Add Book
+- Remove Book
+- Update Book
+- Search Book
+- View All Books
+- Back
+
+## Member Management
+
+- Register Member
+- Remove Member
+- Update Member
+- Search Member
+- View All Members
+- Back
+
+## Transaction Management
+
+- Issue Book
+- Return Book
+- Pay Fine
+- View Transaction History
+- Back
+
+## Reports
+
+- View All Books
+- View Available Books
+- View Issued Books
+- View All Members
+- Members with Pending Fine
+- Overdue Books
+- Back
+
+---
+
+# 15. Transaction Class Design
+
+## Responsibility
+
+The Transaction class stores information about one complete borrowing transaction. It records book issue, return, due dates, fine generated, and transaction status. It does not perform borrowing logic or fine calculation.
+
+### Attributes
+
+- Transaction ID
+- Member ID
+- Book ID
+- Issue Date
+- Due Date
+- Return Date
+- Days Late
+- Fine Generated
+- Status (Issued / Returned)
+
+### Member Functions
+
+- Constructor
+- displayTransaction()
+- markReturned()
+
+### Design Decisions
+
+- One transaction represents one borrowing cycle.
+- Every borrowing creates a new transaction.
+- Fine Generated stores the fine for only that transaction.
+- Status prevents duplicate returns.
+- Borrowing and fine calculation are controlled by the Library class.
+
+---
+
+# 16. Library Class Design
+
+## Responsibility
+
+The Library class is the central controller of the application. It manages all books, members, transactions, library policies, reports, and file handling.
+
+### Attributes
+
+#### Collections
+
+- Books
+- Members
+- Transactions
+
+#### Library Policies
+
+- Maximum Books Per Member
+- Loan Duration
+- Fine Per Day
+- Maximum Borrowing Fine Limit
+
+### Member Functions
+
+#### Book Management
+
+- addBook()
+- removeBook()
+- updateBook()
+- searchBook()
+- viewAllBooks()
+
+#### Member Management
+
+- registerMember()
+- removeMember()
+- updateMember()
+- searchMember()
+- viewAllMembers()
+
+#### Transaction Management
+
+- issueBook()
+- returnBook()
+- payFine()
+- viewTransactionHistory()
+
+#### Reports
+
+- viewAvailableBooks()
+- viewIssuedBooks()
+- viewMembersWithPendingFine()
+- viewOverdueBooks()
+
+#### File Handling
+
+- loadData()
+- saveData()
+
+### Design Decisions
+
+- The Library class controls all business logic.
+- Every operation is validated before execution.
+- Books, Members, and Transactions do not directly modify each other.
+- All file operations are handled by the Library class.
