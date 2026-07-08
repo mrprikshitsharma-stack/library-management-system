@@ -68,7 +68,7 @@ The student will be able to:
 ## Member Management
 
 - Register Member
-- Remove Member
+- Deactivate Member
 - Search Member
 - View Members
 - Update Member
@@ -235,6 +235,7 @@ The Member class stores all information related to a library member. It maintain
 - Email
 - Borrowed Book Count
 - Total Fine
+- Status (Active / Inactive)
 
 ### Member Functions
 
@@ -251,6 +252,7 @@ The Member class stores all information related to a library member. It maintain
 - Individual fine records are stored in the Transaction class.
 - Borrowed Book Count stores the number of books currently borrowed.
 - Complete borrowing history is maintained by the Transaction class.
+- A member is marked as Inactive instead of being permanently deleted to preserve transaction history.
 
 ---
 
@@ -334,7 +336,7 @@ The application starts by displaying the main menu. From here, the librarian can
 ## Member Management
 
 - Register Member
-- Remove Member
+- Deactivate Member
 - Update Member
 - Search Member
 - View All Members
