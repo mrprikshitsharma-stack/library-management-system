@@ -29,7 +29,25 @@ public:
                 string bookID,
                 string issueDate,
                 string dueDate);
+    string getTransactionID()
+    {
+        return transactionID;
+    }
 
+    string getMemberID()
+    {
+        return memberID;
+    }
+
+    string getBookID()
+    {
+        return bookID;
+    }
+
+    string getStatus()
+    {
+        return status;
+    }
     void displayTransaction();
 
     void markReturned(string returnDate,

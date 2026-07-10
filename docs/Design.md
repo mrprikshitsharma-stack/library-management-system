@@ -208,6 +208,9 @@ The Book class stores all information related to a single book in the library. I
 - Constructor
 - displayBook()
 - updateBook()
+- addCopies()
+- issueBook()
+- returnBook()
 - isAvailable()
 
 ### Design Decisions
@@ -216,6 +219,7 @@ The Book class stores all information related to a single book in the library. I
 - Available Copies changes whenever a book is issued or returned.
 - The Book class does not know which member borrowed it.
 - Borrowing information is stored in the Transaction class.
+- Book stock is managed through addCopies(), issueBook(), and returnBook() instead of directly modifying Total Copies or Available Copies.
 
 ---
 
@@ -326,9 +330,10 @@ The application starts by displaying the main menu. From here, the librarian can
 
 ## Book Management
 
-- Add Book
+- Add New Book
+- Add Book Copies
+- Update Book Information
 - Remove Book
-- Update Book
 - Search Book
 - View All Books
 - Back

@@ -29,7 +29,35 @@ public:
            string department,
            string phoneNumber,
            string email);
+    string getMemberID()
+    {
+        return memberID;
+    }
 
+    string getRollNumber()
+    {
+        return rollNumber;
+    }
+
+    string getName()
+    {
+        return name;
+    }
+
+    int getBorrowedBookCount()
+    {
+        return borrowedBookCount;
+    }
+
+    int getTotalFine()
+    {
+        return totalFine;
+    }
+
+    bool getStatus()
+    {
+        return status;
+    }
     void displayMember();
 
     void updateMember(string name,

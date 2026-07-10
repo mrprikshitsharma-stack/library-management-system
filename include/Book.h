@@ -24,16 +24,35 @@ public:
     Book(string bookID,string title,string author,string category,string publisher,
          string isbn,int publicationYear,int totalCopies);
     
+    string getBookID()
+    {
+        return bookID;
+    }
+
+    string getTitle()
+    {
+        return title;
+    }
+
+    int getAvailableCopies()
+    {
+        return availableCopies;
+    }
+
+    int getTotalCopies()
+    {
+        return totalCopies;
+    }
     void displayBook();
 
     void updateBook(string title,
                 string author,
                 string category,
                 string publisher,
-                string isbn,
-                int publicationYear,
-                int totalCopies);
-
+                int publicationYear);
+    void addCopies(int newCopies);
+    void issueBook();
+    void returnBook();
     bool isAvailable();
     
 

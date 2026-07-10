@@ -35,6 +35,11 @@ bool Book::isAvailable()
 {
     return availableCopies > 0;
 }
+void Book::addCopies(int newCopies)
+{
+    totalCopies += newCopies;
+    availableCopies += newCopies;
+}
 void Book::displayBook()
 {
     cout << "----------------------------------------" << endl;
@@ -49,18 +54,24 @@ void Book::displayBook()
     cout << "Available Copies  : " << availableCopies << endl;
     cout << "----------------------------------------" << endl;
 }
-void Book::updateBook(string title,string author,string category,
-         string publisher,string isbn,int publicationYear,int totalCopies)
+void Book::updateBook(string title,
+                      string author,
+                      string category,
+                      string publisher,
+                      int publicationYear)
 {
     this->title = title;
     this->author = author;
     this->category = category;
     this->publisher = publisher;
-    this->isbn = isbn;
     this->publicationYear = publicationYear;
+}
+void Book::issueBook()
+{
+    availableCopies--;
+}
 
-    int issuedCopies = this->totalCopies - this->availableCopies;
-
-    this->totalCopies = totalCopies;
-    this->availableCopies = totalCopies - issuedCopies;
+void Book::returnBook()
+{
+    availableCopies++;
 }
