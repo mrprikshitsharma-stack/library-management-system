@@ -35,8 +35,9 @@ public:
 
     // Member Management
     void registerMember();
-    void deactivateMember();
     void updateMember();
+    void removeMember();
+    void searchMember();
     void viewAllMembers();
 
     // Transaction Management
@@ -44,6 +45,7 @@ public:
     void returnBook();
     void payFine();
     void viewTransactionHistory();
+    
 
     // Reports
     void generateReports();
@@ -59,6 +61,9 @@ public:
     int searchTransactionByID(string transactionID);
     vector<int> searchTransactionByMemberID(string memberID);
     vector<int> searchTransactionByBookID(string bookID);
+
+    int searchActiveTransaction(string memberID,
+                            string bookID);
 
     // File Handling
     void loadData();

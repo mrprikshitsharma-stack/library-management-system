@@ -29,6 +29,17 @@ public:
            string department,
            string phoneNumber,
            string email);
+
+    Member(string memberID,
+       string rollNumber,
+       string name,
+       string department,
+       string phoneNumber,
+       string email,
+       int borrowedBookCount,
+       int totalFine,
+       bool status);
+
     string getMemberID()
     {
         return memberID;
@@ -42,6 +53,20 @@ public:
     string getName()
     {
         return name;
+    }
+    string getDepartment()
+    {
+        return department;
+    }
+
+    string getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    string getEmail()
+    {
+        return email;
     }
 
     int getBorrowedBookCount()
@@ -65,6 +90,10 @@ public:
                       string phoneNumber,
                       string email);
 
+    void borrowBook();
+    void returnBook();
+    void addFine(int amount);
+    void payFine(int amount);
     bool hasFine();
 };
 

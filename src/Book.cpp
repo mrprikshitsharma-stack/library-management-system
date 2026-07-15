@@ -31,6 +31,27 @@ Book::Book(string bookID,string title,string author,string category,
 
     this->availableCopies = totalCopies;
 }
+Book::Book(string bookID,
+           string title,
+           string author,
+           string category,
+           string publisher,
+           string isbn,
+           int publicationYear,
+           int totalCopies,
+           int availableCopies)
+{
+    this->bookID = bookID;
+    this->title = title;
+    this->author = author;
+    this->category = category;
+    this->publisher = publisher;
+    this->isbn = isbn;
+
+    this->publicationYear = publicationYear;
+    this->totalCopies = totalCopies;
+    this->availableCopies = availableCopies;
+}
 bool Book::isAvailable()
 {
     return availableCopies > 0;

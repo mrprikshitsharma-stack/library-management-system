@@ -29,6 +29,16 @@ public:
                 string bookID,
                 string issueDate,
                 string dueDate);
+
+    Transaction(string transactionID,
+            string memberID,
+            string bookID,
+            string issueDate,
+            string dueDate,
+            string returnDate,
+            int daysLate,
+            int fineGenerated,
+            string status);
     string getTransactionID()
     {
         return transactionID;
@@ -47,6 +57,30 @@ public:
     string getStatus()
     {
         return status;
+    }
+    string getIssueDate()
+    {
+        return issueDate;
+    }
+
+    string getDueDate()
+    {
+        return dueDate;
+    }
+
+    string getReturnDate()
+    {
+        return returnDate;
+    }
+
+    int getDaysLate()
+    {
+        return daysLate;
+    }
+
+    int getFineGenerated()
+    {
+        return fineGenerated;
     }
     void displayTransaction();
 

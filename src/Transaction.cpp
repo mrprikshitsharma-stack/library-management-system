@@ -37,6 +37,29 @@ Transaction::Transaction(string transactionID,
 
     this->status = "Issued";
 }
+Transaction::Transaction(string transactionID,
+                         string memberID,
+                         string bookID,
+                         string issueDate,
+                         string dueDate,
+                         string returnDate,
+                         int daysLate,
+                         int fineGenerated,
+                         string status)
+{
+    this->transactionID = transactionID;
+    this->memberID = memberID;
+    this->bookID = bookID;
+
+    this->issueDate = issueDate;
+    this->dueDate = dueDate;
+    this->returnDate = returnDate;
+
+    this->daysLate = daysLate;
+    this->fineGenerated = fineGenerated;
+
+    this->status = status;
+}
 void Transaction::displayTransaction()
 {
     cout << "----------------------------------------" << endl;

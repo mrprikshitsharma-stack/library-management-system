@@ -34,6 +34,27 @@ Member::Member(string memberID,
     this->totalFine = 0;
     this->status = true;
 }
+Member::Member(string memberID,
+               string rollNumber,
+               string name,
+               string department,
+               string phoneNumber,
+               string email,
+               int borrowedBookCount,
+               int totalFine,
+               bool status)
+{
+    this->memberID = memberID;
+    this->rollNumber = rollNumber;
+    this->name = name;
+    this->department = department;
+    this->phoneNumber = phoneNumber;
+    this->email = email;
+
+    this->borrowedBookCount = borrowedBookCount;
+    this->totalFine = totalFine;
+    this->status = status;
+}
 bool Member::hasFine()
 {
     return totalFine > 0;
@@ -72,4 +93,20 @@ void Member::updateMember(string name,
     this->department = department;
     this->phoneNumber = phoneNumber;
     this->email = email;
+}
+void Member::borrowBook()
+{
+    borrowedBookCount++;
+}
+void Member::returnBook()
+{
+    borrowedBookCount--;
+}
+void Member::addFine(int amount)
+{
+    totalFine += amount;
+}
+void Member::payFine(int amount)
+{
+    totalFine -= amount;
 }

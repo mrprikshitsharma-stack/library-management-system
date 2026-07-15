@@ -23,6 +23,16 @@ public:
 
     Book(string bookID,string title,string author,string category,string publisher,
          string isbn,int publicationYear,int totalCopies);
+
+    Book(string bookID,
+     string title,
+     string author,
+     string category,
+     string publisher,
+     string isbn,
+     int publicationYear,
+     int totalCopies,
+     int availableCopies);
     
     string getBookID()
     {
@@ -42,6 +52,30 @@ public:
     int getTotalCopies()
     {
         return totalCopies;
+    }
+    string getAuthor()
+    {
+        return author;
+    }
+
+    string getCategory()
+    {
+        return category;
+    }
+
+    string getPublisher()
+    {
+        return publisher;
+    }
+
+    string getISBN()
+    {
+        return isbn;
+    }
+
+    int getPublicationYear()
+    {
+        return publicationYear;
     }
     void displayBook();
 
